@@ -7,6 +7,7 @@ const cors = require('cors');
 // Import Login model
 // const Login = require('./models/Login');
 const Login = require('./schema/loginSchema')
+const Expense = require('./schema/expenseSchema')
 
 // Initialize Express app
 const app = express();
@@ -27,6 +28,8 @@ db.once('open', () => {
 });
 
 // Routes
+
+// -----------------------------------------Register--------------------------------------------------------------------
 app.post('/register', async (req, res) => {
     try {
         // Extract username, password, and email from request body
@@ -53,6 +56,10 @@ app.post('/register', async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
+
+
+
+// -----------------------------------------Login--------------------------------------------------------------------
 
 app.post('/login', async (req, res) => {
     try {
@@ -89,7 +96,49 @@ console.log(req.body);
     }
 });
 
-// Start the server
+
+// ##########################################Masters######################################################################
+
+// -----------------------------------------Expense--------------------------------------------------------------------
+
+app.post('/master/setexpense', async (req, res) => {
+    try {
+        const { expense, date } = req.body;
+
+        // Create a new expense object based on the schema
+        const newExpense = new Expense({
+            expense,
+            date
+        });
+
+        // Save the new expense to the database
+        await newExpense.save();
+
+        // Send success response
+        res.status(201).json({ message: 'Expense Added successfully' });
+    } catch (error) {
+        console.error(error); // Log the error to the console
+        res.status(500).json({ error: error.message }); // Send error response
+    }
+});
+
+
+// Get all expenses
+app.get('/master/getexpenses', async (req, res) => {
+    try {
+        // Retrieve all expenses from the database
+        const expenses = await Expense.find({});
+        // Send the expenses as a JSON response
+        res.json(expenses);
+    } catch (error) {
+        console.error('Error fetching expenses:', error);
+        res.status(500).json({ error: error.message });
+    }
+});
+
+
+
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
