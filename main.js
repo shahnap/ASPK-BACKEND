@@ -20,15 +20,10 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 // Connect to MongoDB
-// mongoose.connect('mongodb://localhost:27017/aspk', {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true
-// });
-mongoose.connect('mongodb+srv://shahnapshahna243:6epZ28gLnfbexSEI@cluster0.xmbzkh2.mongodb.net/yourDatabaseName?retryWrites=true&w=majority', {
+mongoose.connect('mongodb://localhost:27017/aspk', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
-
 const db = mongoose.connection;
 
 // Check MongoDB connection
