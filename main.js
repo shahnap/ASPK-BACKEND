@@ -310,7 +310,8 @@ app.get('/master/main/getexpensebydate', async (req, res) => {
     }
   });
   
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
+  const PORT = process.env.PORT || 5001; // Change to 5001 or any other available port
+  app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
+  });
+  
