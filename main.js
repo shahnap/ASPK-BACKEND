@@ -19,9 +19,9 @@ const app = express();
 // Middleware for parsing JSON bodies
 app.use(bodyParser.json());
 app.use(cors({
-    origin: 'https://jovial-sfogliatella-630dbc.netlify.app',
-    methods: 'GET,POST,PUT,DELETE',
-    allowedHeaders: 'Content-Type,Authorization'
+    origin: '*', // Allow all origins
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow specific HTTP methods
+    allowedHeaders: ['Content-Type', 'Authorization'] // Allow specific headers
 }));
 // Connect to MongoDB
 mongoose.connect('mongodb://localhost:27017/aspk', {
