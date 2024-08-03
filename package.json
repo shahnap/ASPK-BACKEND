@@ -18,6 +18,7 @@
     "mongodb": "^6.5.0",
     "mongoose": "^8.3.2",
     "mssql": "^10.0.2",
+    "msnodesqlv8": "^2.0.10",
     "vercel": "^35.2.3"
   },
   "engines": {
