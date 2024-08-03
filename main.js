@@ -18,16 +18,17 @@ const app = express();
 
 // Middleware for parsing JSON bodies
 app.use(bodyParser.json());
-app.use(cors({
-    origin: '*', // Allow all origins
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow specific HTTP methods
-    allowedHeaders: ['Content-Type', 'Authorization'] // Allow specific headers
-}));
+app.use(cors());
 // Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/aspk', {
+// mongoose.connect('mongodb://localhost:27017/aspk', {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true
+// });
+mongoose.connect('mongodb+srv://shahnapshahna243:6epZ28gLnfbexSEI@cluster0.xmbzkh2.mongodb.net/yourDatabaseName?retryWrites=true&w=majority', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
+
 const db = mongoose.connection;
 
 // Check MongoDB connection
@@ -314,8 +315,7 @@ app.get('/master/main/getexpensebydate', async (req, res) => {
     }
   });
   
-  const PORT = process.env.PORT || 5001; // Change to 5001 or any other available port
-  app.listen(PORT, () => {
-      console.log(`Server is running on port ${PORT}`);
-  });
-  
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});

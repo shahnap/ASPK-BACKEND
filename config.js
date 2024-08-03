@@ -15,11 +15,9 @@
 // }
 
 // connectToMongoDB();
-
-require('dotenv').config({ path: 'url.env' });
 const { MongoClient } = require('mongodb');
 
-const uri = process.env.MONGO_URI;
+const uri = 'mongodb+srv://shahnapshahna243:6epZ28gLnfbexSEI@cluster0.xmbzkh2.mongodb.net/yourDatabaseName?retryWrites=true&w=majority';
 
 const client = new MongoClient(uri);
 
@@ -27,14 +25,10 @@ async function connectToMongoDB() {
     try {
         await client.connect();
         console.log('Connected to MongoDB Atlas');
-
-        // Perform database operations here if needed
-
     } catch (error) {
         console.error('Error connecting to MongoDB:', error);
-    } finally {
-        await client.close();
     }
 }
 
 connectToMongoDB();
+
