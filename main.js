@@ -1,4 +1,5 @@
 // Import necessary modules
+//const uri = require('./config/')
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -20,17 +21,30 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 // Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/aspk', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-});
-const db = mongoose.connection;
+const uri = 'mongodb+srv://shahnapshahna:ZK2NkuVkSEgshayW@cluster0.xmbzkh2.mongodb.net/aspk?retryWrites=true&w=majority'
+// // mongoose.connect('', {
+// //     useNewUrlParser: true,
+// //     useUnifiedTopology: true
+// // });
+// // const db = mongoose.connection;
 
-// Check MongoDB connection
-db.once('open', () => {
-    console.log('Connected to MongoDB');
-});
-
+// // // Check MongoDB connection
+// // db.once('open', () => {
+// //     console.log('Connected to MongoDB');
+// // });
+async function connectToMongoDB() {
+    try {
+      await mongoose.connect(uri, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      });
+      console.log('Connected to MongoDB');
+    } catch (error) {
+      console.error('Error connecting to MongoDB:', error);
+    }
+  }
+  
+  connectToMongoDB();
 // Routes
 
 // -----------------------------------------Register--------------------------------------------------------------------
